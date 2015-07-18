@@ -3,9 +3,13 @@
 <head>
 <title>Blog</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+ 
   <%= stylesheet_link_tag 'application', 'http://fonts.googleapis.com/css?family=Raleway:400,700' %>
+  <%= stylesheet_link_tag 'application', 'http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,700,100' %>
+  
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= favicon_link_tag 'favicon.ico' %>
+  <%= csrf_meta_tag %>
 </head>
 <body>
 	<div id="sidebar">
@@ -19,36 +23,56 @@
 			<li class="category">Website</li>
 			<li><%= link_to "Blog", root_path %></li>
 			<li><%= link_to "About", about_path %></li>
+			<li><%= link_to "30-Day Challenge", challenge_path %></li>
+			<li><a href="http://www.keithberube.com:3000">Likely Links</a></li>
 		</ul>
 
 		<ul>
 			<li class="category">Social</li>
-			<li><a href="https://twitter.com/keithavocado">Twitter</a></li>
+			<li><a href="https://twitter.com/livingshangrila">Twitter</a></li>
 			<li><a href="http://instagram.com/keithavocado">Instagram</a></li>
 			<li><a href="https://github.com/kberube">Github</a></li>
 			<li><a href="mailto:keith@berube.me">Email</a></li>
 		</ul>
-		<p class="sign_in">Admin Login </p>
+	<% if !user_signed_in? %>
+		<p class="sign_in"><%= link_to "Admin Login", new_user_session_path %> </p>
+	<% end %>
 	</div>
 
 	<div id="main_content">
 		<div id="header">
 			<% if current_page?(root_path) %>
-				<p>All Posts</p>
+				<p>Blog</p>
 			<% elsif current_page?(about_path) %>
-				<p>About</p>
+				<%= link_to "Back to Blog", root_path %>
+			<% elsif current_page?(challenge_path) %>
+				<%= link_to "Back to Blog", root_path %>
 			<% else %>
-				<%= link_to "Back to All Posts", root_path %>
+				<%= link_to "Blog - Back to All Posts", root_path %>
 			<% end %>
-				
+			<% if user_signed_in? %>			
 				<div class="buttons">
 					<button class="button"><%= link_to "New Post", new_post_path %></button>
-					<button class="button">Log Out</button>
+					<button class="button"><%= link_to "Log Out", destroy_user_session_path, :method => :delete %></button>
 				</div>
+			<% end %>
 				</div>
-					<%= flash.each do |name, msg| %>
-						<%= content_tag(:div, msg, class: "alert") %>
-					<% end %>
+						<div id="flash">
+								<p><% flash.each do |name, msg| %>
+						<%= content_tag(:div, msg, class: "alert") %></p>
+						
+		<% end %>
+	</div>
+
+	            <script>
+              $(document).ready(function(){
+                setTimeout(function() {
+                 $('#flash').fadeOut("slow", function() {
+                  $this.remove();
+                 });
+                }, 1500 );
+              });
+            </script>
 		<%= yield %>
 	</div>
 

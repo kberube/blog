@@ -1,23 +1,9 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
- *= require_tree .
- *= require_self
- */
-
 @import 'normalize';
+@import 'style';
 
 html, body {
-	font-family: 'Raleway', sans-serif;
+	font-family: $bodyfont;
+	font-weight: 300;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -35,9 +21,9 @@ a {
 	left: 0;
 	top: 0;
 	height: 100%;
-	background: #f5f7f9;
+	background: $bgcolor;
 	padding: 6.5em 0 0 .5em;
-	border-right: 1px solid #d6dce0;
+	border-right: 1px solid $text;
 
 	#logo img{
 		
@@ -47,29 +33,32 @@ a {
 		top: 2em;
 	}
 	ul {
+		font-family: $headfont;
 		list-style: none;
 		text-align: center;
 		padding-right: 3em;
 		.category {
 			font-weight: 700;
-			font-size: 0.7em;
+			font-size: 1em;
 			text-transform: uppercase;
-			color: #33acb7;
+			color: $hilight;
+
 		}
 		li {
 			padding: .5em 0;
 			a {
-				color: #9eafba;
+				color: $text;
 				text-decoration: none;
 				transition: all .4s ease;
 				&:hover {
-					color: #33acb7;
+					color: $hilight;
 				}
 			}
 		}
 		.active {
 			a {
-				color: #33acb7;
+
+				color: $hilight;
 			}
 		}
 	}
@@ -79,21 +68,28 @@ a {
 		padding: 0em 0 0 4.75em;
 		top: 80%;
 		font-size: .8em;
-		color: #9eafba;
+		color: $text;
+		transition: all .4s ease;
+				&:hover {
+					color: $hilight;
+				}
 	}
 }
 
 .button {
 	outline: none;
 	background: transparent;
-	border: 1px solid #d6dce0;
+	border: 1px solid $text;
 	padding: .5em 1.5em;
 	border-radius: 1.5em;
+	transition: all .4s ease;
 	&:hover {
-		border: 1px solid #33acb7;
-		color: #33acb7;
+		transition: all .4s ease;
+		border: 1px solid $hilight;
+		color: $hilight;
 		a {
-			color: #33acb7 !important;
+			
+			color: $hilight !important;
 		}
 	}
 }
@@ -110,15 +106,19 @@ a {
 	margin-left: 200px;
 	#header {
 		padding: 1em 3em;
-		border-bottom: 1px solid #d6dce0;
-		background: #f5f7f9;
-		color: #9eafba;
+		border-bottom: 1px solid $text;
+		background: $bgcolor;
+		color: $text;
 		p {
 			display: inline;
 		}
 		a {
-			color: #9eafba;
+			color: $text;
 			text-decoration: none;
+			transition: all .4s ease;
+				&:hover{
+				color: $hilight;
+				}
 		}
 		.buttons {
 			float: right;
@@ -131,52 +131,65 @@ a {
 	}
 	.post_wrapper {
 		padding: 3em;
-		border-bottom: 1px solid #d6dce0;
+		border-bottom: 1px solid $text;
 		.title {
 			margin: 0;
 			a {
 				font-weight: 500;
 				text-decoration: none;
-				color: #2a2f35;
+				color: $darktext;
 				font-size: 1.5em;
+				transition: all .9s ease;
 				&:hover {
-					color: #33acb7;
+					transition: all .4s ease;
+					color: $hilight;
 				}
 			}
 		}
-		.date_and_author {
-			color: #9eafba;
+		.date {
+			color: $darktext;
 			margin: .5em 0 0 0;
 		}
 	}
 	#post_content {
 		padding: 1em 3em;
+
 		.title {
 			font-weight: 500;
 			text-decoration: none;
-			color: #2a2f35;
+			color: $darktext;
 			font-size: 2.5em;
-			margin-bottom: 0;
+			margin-bottom: 0;			
 		}
 		.body {
 			font-size: 1.1em;
 			line-height: 1.75;
 		}
-		.date_and_author {
-			color: #9eafba;
+		.date {
+			color: $darktext;
 			margin: .5em 0 2em 0;
+		a{
+		color: $hilight;
+			&:hover {
+			transition: all .4s ease;
+			color: $darktext;
+			}
+
+		}
 		}
 		#comments {
+			color: $darktext;
 			h2 {
+
 				margin: 3em 0 1em 0;
-				border-bottom: 1px solid #d6dce0;
+				border-bottom: 1px solid $text;
 				padding-bottom: 0.5em;
 			}
 			h3 {
 				margin-top: 2em;
 			}
 			.comment {
-				border-bottom: 1px solid #d6dce0;
+				border-bottom: 1px solid $text;
 				padding: 1.5em 2em;
 				.clear_both {
 					clear: both;
@@ -209,6 +222,7 @@ a {
 			}
 		}
 	}
+
 	#page_wrapper {
 		padding: 3em;
 		#profile_image {
@@ -217,19 +231,53 @@ a {
 			margin-right: 2em;
 			img {
 				width: 100%;
-				border-radius: 0.35em;
+				border-radius: 0.5em;
 			}
 		}
+		#river {
+			width: 300px;
+			float: left;
+			margin-right: 2em;
+			img {
+				width: 100%;
+				border-radius: 0.5em;
+			}}
+			#image3 {
+			width: 200px;
+			float: right;
+			margin-left: 1em;
+			img {
+				width: 100%;
+				border-radius: 0.5em;
+			}}
+			#image4 {
+			width: 200px;
+			float: right;
+			margin-left: 1em;
+			img {
+				width: 100%;
+				border-radius: 0.5em;
+			}}
+			#image5 {
+			width: 200px;
+			float: right;
+			margin-left: 1em;
+			img {
+				width: 100%;
+				border-radius: 0.5em;
+			}}
 		#content {
 			h1 {
+				color: $darktext;
 				font-weight: 500;
 			}
 			p {
+				color: $darktext;
 				font-size: 1.1em;
 				line-height: 1.75;
 			}
 			a {
-				color: #33acb7;
+				color: $hilight;
 				font-weight: 700;
 				text-decoration: none;
 			}
@@ -240,8 +288,8 @@ a {
 	}
 	input[type="text"], input[type="email"], input[type="password"], textarea {
 		width: 90%;
-		border: 1px solid #d6dce0;
-		border-radius: .35em;
+		border: 1px solid $text;
+		border-radius: em;
 		margin-top: 10px;
 		padding: .5em 1em;
 		line-height: 1.75;
@@ -253,16 +301,39 @@ a {
 		min-height: 180px;
 	}
 	input[type="submit"] {
+		color: $text;
 		outline: none;
 		background: transparent;
-		border: 1px solid #d6dce0;
+		border: 1px solid $text;
 		padding: .5em 1.5em;
 		font-size: 1.1em;
 		border-radius: 1.5em;
 		margin-left: .5em;
+		transition: all .9s ease;
 		&:hover {
-			border: 1px solid #33acb7;
-			color: #33acb7;
+			transition: all .4s ease;
+			border: 1px solid $hilight;
+			color: $hilight;
 		}
 	}
 }
+	#page_wrapper_signup {
+	display: none !important;
+	}
+
+#flash {
+	font-size: 1.5em;
+	font-weight: 900;
+	color: $hilight;
+	position: absolute;
+	top: -0.5em;
+	right: 35%;	
+}
+.challenge {
+			width: 700px;
+
+			img {
+				width: 100%;
+				border-radius: 0.5em;
+				}
+			}
